@@ -11,7 +11,7 @@
           maxlength="12"
           @input="(event) => this.countThePossiblePossibilities(event)"
         />
-        <button class="search-button" @click="submitMe">Submit</button>
+        <button class="search-button" @click="preFlightChecks">Submit</button>
       </div>
     </div>
     <div v-else>
@@ -25,7 +25,11 @@
           disabled
           @input="(event) => this.countThePossiblePossibilities(event)"
         />
-        <button class="search-button-disabled" @click="submitMe" disabled>
+        <button
+          class="search-button-disabled"
+          @click="preFlightChecks"
+          disabled
+        >
           Submit
         </button>
       </div>
@@ -66,9 +70,13 @@ export default class Home extends Vue {
   loading = false;
   rounds = 0;
 
-  async submitMe() {
+  async preFlightChecks() {
     this.loading = true;
     let cleanWord = this.sanitizeSearch();
+    this.loadPossiblePalindromes(cleanWord)
+  }
+
+  async loadPossiblePalindromes(cleanWord: string) {
     let req: FindThePalindromeRequest = { StringToCheck: cleanWord };
     await store.dispatch.getPalindrome(req);
     this.palindromeList = store.state.palindrome.palindrome;
