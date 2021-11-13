@@ -35,9 +35,12 @@
       </div>
     </div>
     <div v-if="rounds > 1" class="permutation-container">
-      <span id="pwp" :class="createColorClass()"
+      <span :class="createColorClass()"
         >Possible word permutation: {{ rounds.toLocaleString() }}</span
       >
+      <span v-if="rounds > 362880" :class="createColorClass()">{{
+        createTimeSpan()
+      }}</span>
     </div>
     <div v-if="loading">
       <Loading />
@@ -73,7 +76,15 @@ export default class Home extends Vue {
   async preFlightChecks() {
     this.loading = true;
     let cleanWord = this.sanitizeSearch();
-    this.loadPossiblePalindromes(cleanWord)
+    this.loadPossiblePalindromes(cleanWord);
+  }
+
+  createTimeSpan(): string {
+    return (
+      "Will take up to " +
+      Math.round(100 / (479001600 / this.rounds)) +
+      " seconds"
+    );
   }
 
   async loadPossiblePalindromes(cleanWord: string) {
@@ -119,13 +130,15 @@ export default class Home extends Vue {
 <style scoped>
 .permutation-container {
   padding-top: 10px;
+  display: flex;
+  flex-direction: column;
 }
 
 .home {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 25%;
+  margin-top: 15%;
 }
 
 .form-wrapper {
