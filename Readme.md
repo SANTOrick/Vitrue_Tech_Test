@@ -10,11 +10,6 @@ dotnet run
 http://localhost:5000/swagger/index.html
 ```
 
-### SWAGGER API DOCUMENTATION
-```
-http://localhost:5000/swagger/index.html
-```
-
 # frontend
 
 ### Project setup
