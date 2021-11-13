@@ -30,7 +30,7 @@ npm run serve
 ```
 npm run build
 ```
-##Tests
+## Test
 ```
 npm run test:unit
 ```
