@@ -31,13 +31,13 @@ namespace backend.services
 
         public void LoopIn(char[] list)
         {
-            int wordcCount = list.Length - 1;
-            LoopIn(list, 0, wordcCount);
+            int charCount = list.Length - 1;
+            LoopIn(list, 0, charCount);
         }
 
-        private void LoopIn(char[] list, int currentIndex, int wordCount)
+        private void LoopIn(char[] list, int currentIndex, int charCount)
         {
-            if (currentIndex == wordCount)
+            if (currentIndex == charCount)
             {
 
                 string word = new string(list.ToArray());
@@ -53,10 +53,10 @@ namespace backend.services
 
             }
             else
-                for (int i = currentIndex; i <= wordCount; i++)
+                for (int i = currentIndex; i <= charCount; i++)
                 {
                     Mix(ref list[currentIndex], ref list[i]);
-                    LoopIn(list, currentIndex + 1, wordCount);
+                    LoopIn(list, currentIndex + 1, charCount);
                     Mix(ref list[currentIndex], ref list[i]);
                 }
         }
